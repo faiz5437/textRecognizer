@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.PackageManagerCompat;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
@@ -25,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -63,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TextRecognizer textRecognizer;
 
+    private LinearLayout ly, lyEt;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageIv);
         recognizedTextEdit = findViewById(R.id.recognizedTextEt);
         progressDialog = new ProgressDialog(this);
+        ly = findViewById(R.id.linearLayout);
+        lyEt = findViewById(R.id.lyEt);
 
         cameraPermission = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE};
         storagePermission = new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE};
@@ -87,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showInputImageDialog();
+                lyEt.setVisibility(View.INVISIBLE);
             }
 
 
@@ -99,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Silahkan Pilih Gambar Terlebih Dahulu", Toast.LENGTH_SHORT).show();
                 }else {
                     recognizeTextFromImage();
+                    lyEt.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -201,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
                         imageUri = data.getData();
                         Log.d(TAG, "onActivityResult: imageUri: "+ imageUri);
                         // set ke imageviw
+                        ly.setVisibility(View.VISIBLE);
                         imageView.setImageURI(imageUri);
                     }else{
                         Log.d(TAG, "galeryOnActivityResult: cancelled");
@@ -235,6 +245,7 @@ public class MainActivity extends AppCompatActivity {
                         // image is taken from camera
                         // we already have the image in imageUri using function pickImageCamera()
                         Log.d(TAG, "onActivityResult: imageUri: " + imageUri);
+                        ly.setVisibility(View.VISIBLE);
                         imageView.setImageURI(imageUri);
 
                     }else{

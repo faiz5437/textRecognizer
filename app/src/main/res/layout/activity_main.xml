@@ -9,6 +9,7 @@
     tools:context=".MainActivity">
 
     <LinearLayout
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -18,25 +19,33 @@
         android:layout_weight="1"
         android:text="Ambil Gambar"
         android:layout_marginEnd="5dp"
-        app:cornerRadius="5dp"
-        app:icon="@drawable/ic_add_photo"
+        android:textColor="@color/white"
+        app:cornerRadius="20dp"
+        app:icon="@drawable/camera_svgrepo_com"
+        app:iconTint="@color/white"
         android:layout_width="match_parent"
+        android:backgroundTint="#0098DA"
         android:layout_height="match_parent"/>
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/recognizedTextBtn"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:cornerRadius="5dp"
-        app:icon="@drawable/ic_baseline_document_scanner_24"
-        android:layout_marginStart="5dp"
-        android:text="Hasil Text"
-        android:layout_weight="1"
-        />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/recognizedTextBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="Hasil Text"
+            app:backgroundTint="#0098DA"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/text_svgrepo_com"
+            app:iconTint="@color/white"/>
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -48,6 +57,11 @@
             android:src="@drawable/ic_baseline_image_24"
             android:adjustViewBounds="true"
             app:strokeWidth="2dp"/>
+        <LinearLayout
+            android:id="@+id/lyEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
         <TextView
             style="@style/TextAppearance.MaterialComponents.Headline6"
             android:layout_width="match_parent"
@@ -59,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="12dp"/>
+        </LinearLayout>
         </LinearLayout>
 
 
