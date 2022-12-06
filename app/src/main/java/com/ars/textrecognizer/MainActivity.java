@@ -15,7 +15,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -45,7 +48,7 @@ import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
-    private MaterialButton inputImageBtn, reconizeTextBtn;
+    private MaterialButton inputImageBtn, reconizeTextBtn, btnCopy;
     private ShapeableImageView imageView;
     private EditText recognizedTextEdit;
 
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
         inputImageBtn = findViewById(R.id.inputImageBtn);
         reconizeTextBtn = findViewById(R.id.recognizedTextBtn);
         imageView = findViewById(R.id.imageIv);
+        btnCopy = findViewById(R.id.btn_copy);
         recognizedTextEdit = findViewById(R.id.recognizedTextEt);
         progressDialog = new ProgressDialog(this);
         ly = findViewById(R.id.linearLayout);
@@ -109,6 +113,13 @@ public class MainActivity extends AppCompatActivity {
 
                     recognizeTextFromImage();
                     lyEt.setVisibility(View.VISIBLE);
+                    btnCopy.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            String textResult = recognizedTextEdit.getText().toString();
+                            copyText(textResult);
+                        }
+                    });
                 }
             }
         });
@@ -333,5 +344,12 @@ public class MainActivity extends AppCompatActivity {
             }
             break;
         }
+    }
+
+    private void copyText (String text){
+        ClipboardManager clipboardManager = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("Data Sudah Di Copy", text);
+        clipboardManager.setPrimaryClip(clip);
+        Toast.makeText(this, "Data Dicopi", Toast.LENGTH_SHORT).show();
     }
 }
