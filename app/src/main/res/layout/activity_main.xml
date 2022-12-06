@@ -28,6 +28,7 @@
         android:layout_height="match_parent"/>
 
         <com.google.android.material.button.MaterialButton
+            android:visibility="gone"
             android:id="@+id/recognizedTextBtn"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,12 +63,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-        <TextView
-            style="@style/TextAppearance.MaterialComponents.Headline6"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hasil Recogninze :"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hasil Recognize :"/>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_copy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/biru"
+                app:cornerRadius="20dp"
+                android:backgroundTint="#FFFFFF"
+                app:icon="@drawable/ic_baseline_content_copy_24"
+                app:iconTint="@color/biru"
+                android:text="Copy Text"
+                android:layout_marginLeft="30dp"/>
+        </LinearLayout>
         <EditText
             android:id="@+id/recognizedTextEt"
             android:layout_width="match_parent"

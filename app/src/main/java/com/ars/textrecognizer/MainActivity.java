@@ -94,18 +94,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 showInputImageDialog();
+
                 lyEt.setVisibility(View.INVISIBLE);
             }
-
-
         });
 
         reconizeTextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (imageUri == null){
-                    Toast.makeText(MainActivity.this, "Silahkan Pilih Gambar Terlebih Dahulu", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Silahkan Pilih Gambar Terlebih Dahulu",
+                            Toast.LENGTH_SHORT).show();
                 }else {
+
                     recognizeTextFromImage();
                     lyEt.setVisibility(View.VISIBLE);
                 }
@@ -128,7 +129,6 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Text text) {
                             progressDialog.dismiss();
-
                             String recognizedText = text.getText();
                             Log.d(TAG, "onSuccess: recognizedText: "+recognizedText);
                             recognizedTextEdit.setText(recognizedText);
@@ -138,7 +138,8 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             Log.e(TAG, "onFailure: ", e);
-                            Toast.makeText(MainActivity.this, "Failed Recognizeing Text Due To "+e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Failed Recognizeing Text Due To "+e.getMessage(),
+                                    Toast.LENGTH_SHORT).show();
                         }
                     });
 
@@ -146,15 +147,16 @@ public class MainActivity extends AppCompatActivity {
         } catch (IOException e) {
             progressDialog.dismiss();
             Log.e(TAG, "recognizeTextFromImage: ", e);
-            Toast.makeText(this, "Failed Preparing Image Due To "+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Failed Preparing Image Due To "+e.getMessage(),
+                    Toast.LENGTH_SHORT).show();
         }
     }
 
     private void showInputImageDialog() {
         PopupMenu popupMenu = new PopupMenu(this, inputImageBtn);
 
-        popupMenu.getMenu().add(Menu.NONE, 1, 1,"CAMERA");
-        popupMenu.getMenu().add(Menu.NONE, 2, 2,"GALLERY");
+        popupMenu.getMenu().add(Menu.NONE, 1, 1,"KAMERA");
+        popupMenu.getMenu().add(Menu.NONE, 2, 2,"GALERI");
 
         popupMenu.show();
 
@@ -212,6 +214,8 @@ public class MainActivity extends AppCompatActivity {
                         // set ke imageviw
                         ly.setVisibility(View.VISIBLE);
                         imageView.setImageURI(imageUri);
+                        reconizeTextBtn.setVisibility(View.VISIBLE);
+
                     }else{
                         Log.d(TAG, "galeryOnActivityResult: cancelled");
                         Toast.makeText(MainActivity.this, "Gagal Mengambil Gambar", Toast.LENGTH_SHORT).show();
@@ -247,6 +251,8 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "onActivityResult: imageUri: " + imageUri);
                         ly.setVisibility(View.VISIBLE);
                         imageView.setImageURI(imageUri);
+                        reconizeTextBtn.setVisibility(View.VISIBLE);
+
 
                     }else{
                         Log.d(TAG, "cameraOnActivityResult: cancelled");
